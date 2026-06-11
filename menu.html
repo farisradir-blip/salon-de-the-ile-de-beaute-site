@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Salon de Thé - Ile de Beauté — Menu &amp; Carte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<style>
+:root{--fd:'Cormorant Garamond'}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:hidden;scroll-behavior:auto}
+:root{--bg:#07080C;--s1:#0D0F15;--s2:#13151E;--acc:#B89060;--acc2:#7A5A30;--acc3:#D4B080;--txt:#EDE8DC;--mu:#8A7A65;--br:rgba(184,144,96,.13);--pc:184,144,96;--fd:'Cormorant Garamond'}
+body{background:var(--bg);color:var(--txt);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
+::selection{background:var(--acc);color:var(--bg)}
+::-webkit-scrollbar{width:1px}::-webkit-scrollbar-thumb{background:var(--acc)}
+#c1,#c2{position:fixed;border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:difference;top:0;left:0;will-change:transform}
+#c1{width:6px;height:6px;background:#fff;transform:translate(-50%,-50%)}
+#c2{width:34px;height:34px;border:1px solid rgba(255,255,255,.3);transform:translate(-50%,-50%);transition:width .4s cubic-bezier(.16,1,.3,1),height .4s cubic-bezier(.16,1,.3,1)}
+body.hov #c2{width:56px;height:56px}
+#noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.034;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");background-size:200px;animation:ns 8s steps(1) infinite}
+@keyframes ns{0%{background-position:0 0}12%{background-position:-40px 18px}25%{background-position:18px -30px}37%{background-position:-10px 40px}50%{background-position:30px 6px}62%{background-position:-20px -12px}75%{background-position:8px 22px}87%{background-position:-5px -18px}}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:28px 5vw;display:flex;align-items:center;justify-content:space-between;transition:padding .5s,background .5s,backdrop-filter .5s}
+nav.stuck{padding:13px 5vw;background:rgba(7,8,12,.88);backdrop-filter:blur(28px);border-bottom:1px solid var(--br)}
+.nl{font-family:var(--fd),serif;font-size:1.05rem;letter-spacing:.16em;color:var(--acc);text-decoration:none;transition:opacity .3s}
+.nl:hover{opacity:.65}
+.nr{display:flex;gap:28px;list-style:none;align-items:center}
+.nr a{font-size:.57rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .3s;position:relative}
+.nr a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--acc);transition:width .3s}
+.nr a:hover,.nr a.active{color:var(--acc)}
+.nr a:hover::after,.nr a.active::after{width:100%}
+.nbtn{padding:9px 20px;border:1px solid var(--acc);color:var(--acc);font-size:.57rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;transition:background .3s,color .3s;display:inline-block}
+.nbtn:hover{background:var(--acc);color:var(--bg)}
+.nbtn::after{display:none!important}
+@media(max-width:768px){.nr li:not(:last-child){display:none}}
+section{padding:96px 5vw;position:relative}
+.stag{font-size:.55rem;letter-spacing:.42em;text-transform:uppercase;color:var(--acc);display:block;margin-bottom:18px}
+.stitle{font-family:var(--fd),serif;font-size:clamp(1.8rem,3.8vw,3.4rem);font-weight:300;line-height:1.1}
+.stitle em{font-style:italic;color:var(--acc)}
+.rw{overflow:hidden;display:block}.ri{display:inline-block;transform:translateY(110%)}
+.acc-line{width:1px;height:68px;background:var(--acc);margin:36px auto;opacity:.55}
+footer{padding:46px 5vw;border-top:1px solid var(--br);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.fl{font-family:var(--fd),serif;font-size:.95rem;color:var(--acc);letter-spacing:.14em}
+.fc{font-size:.57rem;color:var(--mu);letter-spacing:.08em}
+.btn-a{display:inline-flex;align-items:center;gap:10px;padding:14px 30px;border:1px solid var(--acc);color:var(--acc);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;position:relative;overflow:hidden;transition:color .4s}
+.btn-a::after{content:'';position:absolute;inset:0;background:var(--acc);transform:translateX(-101%);transition:transform .44s cubic-bezier(.77,0,.18,1)}
+.btn-a:hover{color:var(--bg)}.btn-a:hover::after{transform:translateX(0)}
+.btn-a span{position:relative;z-index:1}
+.btn-b{display:inline-flex;align-items:center;gap:10px;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .3s,gap .4s}
+.btn-b:hover{color:var(--acc);gap:18px}
+.bbl{width:28px;height:1px;background:currentColor;display:block;transition:width .4s}
+.btn-b:hover .bbl{width:44px}
+
+
+.ph{position:relative;height:54vh;min-height:360px;overflow:hidden}
+.ph img{width:100%;height:100%;object-fit:cover;filter:brightness(.5) saturate(.7);transform:scale(1.04)}
+.ph-ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;padding:0 5vw 7vh;background:linear-gradient(180deg,transparent 20%,rgba(7,8,12,.82) 100%)}
+.ph-ov h1{font-family:var(--fd),serif;font-size:clamp(3rem,8vw,7rem);font-weight:300;letter-spacing:-.02em}
+.ph-ov h1 em{font-style:italic;color:var(--acc)}
+.ph-ov p{font-size:.55rem;letter-spacing:.42em;text-transform:uppercase;color:var(--acc);margin-bottom:14px}
+.mcat{padding:62px 0;border-bottom:1px solid var(--br)}.mcat:last-child{border-bottom:none;padding-bottom:0}
+.mcat-hd{display:flex;align-items:center;gap:18px;margin-bottom:42px}
+.mcat-icon{font-size:1.55rem}.mcat-hd h3{font-family:var(--fd),serif;font-size:clamp(1.7rem,3vw,2.6rem);font-weight:300}
+.mcat-rule{flex:1;height:1px;background:var(--br)}
+.mcat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--br)}
+@media(max-width:700px){.mcat-grid{grid-template-columns:1fr}}
+.mi{background:var(--bg);padding:26px 24px;transition:background .4s;position:relative;overflow:hidden}
+.mi::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--acc);transform:scaleY(0);transform-origin:bottom;transition:transform .4s}
+.mi:hover{background:var(--s1)}.mi:hover::before{transform:scaleY(1)}
+.mi-name{font-family:var(--fd),serif;font-size:1.1rem;font-weight:400;margin-bottom:7px}
+.mi-desc{font-size:.77rem;color:var(--mu);line-height:1.72}
+
+</style>
+</head>
+<body>
+<div id="c1"></div><div id="c2"></div>
+<div id="noise"></div>
+<nav id="nav">
+  <a href="./index.html" class="nl">S.</a>
+  <ul class="nr"><li><a href="./index.html">Accueil</a></li>
+    <li><a href="./menu.html" class="active">Menu</a></li>
+    <li><a href="./galerie.html">Galerie</a></li>
+    <li><a href="./reservation.html">Réserver</a></li>
+    <li><a href="./contact.html">Contact</a></li>
+    <li><a href="./reservation.html" class="nbtn">Réserver</a></li>
+  </ul>
+</nav>
+<div class="ph">
+  <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&h=750&q=82&auto=format&fit=crop" alt="Salon de Thé - Ile de Beauté" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&h=750&q=82&auto=format&fit=crop'" style="width:100%;height:100%;object-fit:cover;filter:brightness(.5) saturate(.7);transform:scale(1.04)">
+  <div class="ph-ov"><p>Menu · 06300 Nice</p><h1><span class="rw"><span class="ri">Notre <em>Carte</em></span></span></h1></div>
+</div>
+<section id="mc"><div class="mcat">
+  <div class="mcat-hd"><span class="mcat-icon">🥗</span><h3><span class="rw"><span class="ri">Entrées</span></span></h3><div class="mcat-rule"></div></div>
+  <div class="mcat-grid"><article class="mi"><h4 class="mi-name">Foie Gras Poêlé</h4><p class="mi-desc">Chutney de figues, brioche toastée, gel vinaigre.</p></article><article class="mi"><h4 class="mi-name">Carpaccio de Saint-Jacques</h4><p class="mi-desc">Agrumes, herbes fraîches, huile d'argan.</p></article><article class="mi"><h4 class="mi-name">Velouté de Truffe</h4><p class="mi-desc">Émulsion au parmesan, truffe noire du Périgord.</p></article><article class="mi"><h4 class="mi-name">Tartare de Thon Rouge</h4><p class="mi-desc">Avocat, ponzu, sésame noir grillé.</p></article></div>
+</div><div class="mcat">
+  <div class="mcat-hd"><span class="mcat-icon">🍽️</span><h3><span class="rw"><span class="ri">Plats</span></span></h3><div class="mcat-rule"></div></div>
+  <div class="mcat-grid"><article class="mi"><h4 class="mi-name">Filet de Bœuf Rossini</h4><p class="mi-desc">Sauce périgueux, pomme soufflée, truffe.</p></article><article class="mi"><h4 class="mi-name">Homard Bleu Breton</h4><p class="mi-desc">Bisque légère, fenouil caramélisé.</p></article><article class="mi"><h4 class="mi-name">Agneau des Pyrénées</h4><p class="mi-desc">Jus corsé, légumes primeurs de saison.</p></article><article class="mi"><h4 class="mi-name">Risotto Truffé</h4><p class="mi-desc">Arborio, parmesan 36 mois, truffe noire.</p></article></div>
+</div><div class="mcat">
+  <div class="mcat-hd"><span class="mcat-icon">🍮</span><h3><span class="rw"><span class="ri">Desserts</span></span></h3><div class="mcat-rule"></div></div>
+  <div class="mcat-grid"><article class="mi"><h4 class="mi-name">Soufflé Grand Marnier</h4><p class="mi-desc">Chaud, servi à la minute, glace vanille.</p></article><article class="mi"><h4 class="mi-name">Vacherin Glacé Maison</h4><p class="mi-desc">Meringue, sorbet framboise, coulis.</p></article><article class="mi"><h4 class="mi-name">Tarte Tatin du Chef</h4><p class="mi-desc">Caramel beurre salé, crème fraîche.</p></article><article class="mi"><h4 class="mi-name">Mignardises du Chef</h4><p class="mi-desc">Coffret surprise, petit café offert.</p></article></div>
+</div></section>
+<section style="background:var(--s1);text-align:center">
+  <span class="stag">Prêt à passer à table ?</span>
+  <h2 class="stitle" style="margin-bottom:32px"><span class="rw"><span class="ri"><em>Réservez</em> votre moment</span></span></h2>
+  <a href="./reservation.html" class="btn-a"><span>Réserver maintenant</span></a>
+</section>
+<footer>
+  <span class="fl">Salon de Thé - Ile de Beauté</span>
+  <span class="fc">7 Pl. de l'Île de Beauté, 06300 Nice, France</span>
+  <span style="font-size:.62rem;color:var(--mu)"><a href="tel:+33 4 93 56 00 52" style="color:var(--mu);text-decoration:none;transition:color .3s" onmouseenter="this.style.color='var(--acc)'" onmouseleave="this.style.color='var(--mu)'">+33 4 93 56 00 52</a>&ensp;·&ensp;<a href="https://www.google.com/maps/place/Salon+de+Th%C3%A9+-+Ile+de+Beaut%C3%A9/data=!4m7!3m6!1s0x12cddab8e6337149:0x8176478292729387!8m2!3d43.6987788!4d7.2847799!16s%2Fg%2F11b6dp3g2f!19sChIJSXEz5rjazRIRh5NykoJHdoE?authuser=0&hl=fr&rclk=1" target="_blank" style="color:var(--acc);text-decoration:none;font-size:.6rem;letter-spacing:.1em">Maps →</a></span>
+  <span class="fc">© Salon de Thé - Ile de Beauté · 06300 Nice</span>
+</footer>
+<script>gsap.registerPlugin(ScrollTrigger);
+const lenis=new Lenis({duration:1.45,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});
+lenis.on('scroll',ScrollTrigger.update);
+gsap.ticker.add(t=>lenis.raf(t*1000));
+gsap.ticker.lagSmoothing(0);
+const c1=document.getElementById('c1'),c2=document.getElementById('c2');
+let mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+document.querySelectorAll('a,button,input,select,textarea').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});
+(function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;c1.style.left=mx+'px';c1.style.top=my+'px';c2.style.left=rx+'px';c2.style.top=ry+'px';requestAnimationFrame(loop);})();
+ScrollTrigger.create({trigger:'body',start:'80px top',
+  onEnter:()=>document.getElementById('nav').classList.add('stuck'),
+  onLeaveBack:()=>document.getElementById('nav').classList.remove('stuck')});
+document.querySelectorAll('.ri').forEach(el=>gsap.to(el,{y:0,duration:.95,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 93%'}}));
+document.querySelectorAll('.btn-a').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect();gsap.to(btn,{x:(e.clientX-r.left-r.width/2)*.18,y:(e.clientY-r.top-r.height/2)*.18,duration:.3,ease:'power2.out'})});
+  btn.addEventListener('mouseleave',()=>gsap.to(btn,{x:0,y:0,duration:.7,ease:'elastic.out(1,.4)'}));
+});
+
+gsap.to('.ph img',{scale:1,duration:1.8,ease:'power2.out'});
+gsap.fromTo('.mcat',{opacity:0,y:28},{opacity:1,y:0,stagger:.14,duration:.85,ease:'power2.out',
+  scrollTrigger:{trigger:'#mc',start:'top 80%'}});
+gsap.fromTo('.mi',{opacity:0,y:14},{opacity:1,y:0,stagger:.05,duration:.6,ease:'power2.out',
+  scrollTrigger:{trigger:'.mcat-grid',start:'top 85%'}});
+</script>
+</body></html>
