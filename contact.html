@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Salon de Thé - Ile de Beauté — Contact &amp; Accès</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<style>
+:root{--fd:'Playfair Display'}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:hidden;scroll-behavior:auto}
+:root{--bg:#0A0607;--s1:#140C0E;--s2:#1C1014;--acc:#A83850;--acc2:#6B1E30;--acc3:#CC5870;--txt:#F2EAE8;--mu:#8A6872;--br:rgba(168,56,80,.13);--pc:168,56,80;--fd:'Playfair Display'}
+body{background:var(--bg);color:var(--txt);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
+::selection{background:var(--acc);color:var(--bg)}
+::-webkit-scrollbar{width:1px}::-webkit-scrollbar-thumb{background:var(--acc)}
+#c1,#c2{position:fixed;border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:difference;top:0;left:0;will-change:transform}
+#c1{width:6px;height:6px;background:#fff;transform:translate(-50%,-50%)}
+#c2{width:34px;height:34px;border:1px solid rgba(255,255,255,.3);transform:translate(-50%,-50%);transition:width .4s cubic-bezier(.16,1,.3,1),height .4s cubic-bezier(.16,1,.3,1)}
+body.hov #c2{width:56px;height:56px}
+#noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.034;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");background-size:200px;animation:ns 8s steps(1) infinite}
+@keyframes ns{0%{background-position:0 0}12%{background-position:-40px 18px}25%{background-position:18px -30px}37%{background-position:-10px 40px}50%{background-position:30px 6px}62%{background-position:-20px -12px}75%{background-position:8px 22px}87%{background-position:-5px -18px}}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:28px 5vw;display:flex;align-items:center;justify-content:space-between;transition:padding .5s,background .5s,backdrop-filter .5s}
+nav.stuck{padding:13px 5vw;background:rgba(10,6,7,.88);backdrop-filter:blur(28px);border-bottom:1px solid var(--br)}
+.nl{font-family:var(--fd),serif;font-size:1.05rem;letter-spacing:.16em;color:var(--acc);text-decoration:none;transition:opacity .3s}
+.nl:hover{opacity:.65}
+.nr{display:flex;gap:28px;list-style:none;align-items:center}
+.nr a{font-size:.57rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .3s;position:relative}
+.nr a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--acc);transition:width .3s}
+.nr a:hover,.nr a.active{color:var(--acc)}
+.nr a:hover::after,.nr a.active::after{width:100%}
+.nbtn{padding:9px 20px;border:1px solid var(--acc);color:var(--acc);font-size:.57rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;transition:background .3s,color .3s;display:inline-block}
+.nbtn:hover{background:var(--acc);color:var(--bg)}
+.nbtn::after{display:none!important}
+@media(max-width:768px){.nr li:not(:last-child){display:none}}
+section{padding:96px 5vw;position:relative}
+.stag{font-size:.55rem;letter-spacing:.42em;text-transform:uppercase;color:var(--acc);display:block;margin-bottom:18px}
+.stitle{font-family:var(--fd),serif;font-size:clamp(1.8rem,3.8vw,3.4rem);font-weight:300;line-height:1.1}
+.stitle em{font-style:italic;color:var(--acc)}
+.rw{overflow:hidden;display:block}.ri{display:inline-block;transform:translateY(110%)}
+.acc-line{width:1px;height:68px;background:var(--acc);margin:36px auto;opacity:.55}
+footer{padding:46px 5vw;border-top:1px solid var(--br);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.fl{font-family:var(--fd),serif;font-size:.95rem;color:var(--acc);letter-spacing:.14em}
+.fc{font-size:.57rem;color:var(--mu);letter-spacing:.08em}
+.btn-a{display:inline-flex;align-items:center;gap:10px;padding:14px 30px;border:1px solid var(--acc);color:var(--acc);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;position:relative;overflow:hidden;transition:color .4s}
+.btn-a::after{content:'';position:absolute;inset:0;background:var(--acc);transform:translateX(-101%);transition:transform .44s cubic-bezier(.77,0,.18,1)}
+.btn-a:hover{color:var(--bg)}.btn-a:hover::after{transform:translateX(0)}
+.btn-a span{position:relative;z-index:1}
+.btn-b{display:inline-flex;align-items:center;gap:10px;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .3s,gap .4s}
+.btn-b:hover{color:var(--acc);gap:18px}
+.bbl{width:28px;height:1px;background:currentColor;display:block;transition:width .4s}
+.btn-b:hover .bbl{width:44px}
+
+
+#ch{padding:140px 5vw 58px;background:var(--s2);border-bottom:1px solid var(--br)}
+#ch h1{font-family:var(--fd),serif;font-size:clamp(2.8rem,7vw,6.5rem);font-weight:300;margin-top:14px;line-height:.9}
+#ch h1 em{font-style:italic;color:var(--acc)}
+#cm{display:grid;grid-template-columns:1fr 1fr}
+@media(max-width:900px){#cm{grid-template-columns:1fr}}
+.cc{padding:58px 5vw;border-right:1px solid var(--br)}.cc:last-child{border-right:none;background:var(--s1)}
+.cc h3{font-family:var(--fd),serif;font-size:1.5rem;font-weight:300;margin-bottom:30px}
+.hr{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--br);font-size:.82rem;opacity:0;transform:translateX(-12px)}
+.hr:last-child{border-bottom:none}.hd2{color:var(--txt)}.ht{color:var(--acc);letter-spacing:.06em}
+.ci{display:flex;align-items:flex-start;gap:13px;padding:14px 0;border-bottom:1px solid var(--br);opacity:0;transform:translateX(12px)}
+.ci:last-of-type{border-bottom:none}
+.cii{width:30px;height:30px;border:1px solid rgba(168,56,80,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.74rem;color:var(--acc);flex-shrink:0}
+.cil{font-size:.51rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mu);display:block;margin-bottom:3px}
+.civ{font-size:.84rem}.civ a{color:inherit;text-decoration:none;transition:color .3s}.civ a:hover{color:var(--acc)}
+
+</style>
+</head>
+<body>
+<div id="c1"></div><div id="c2"></div>
+<div id="noise"></div>
+<nav id="nav">
+  <a href="./index.html" class="nl">S.</a>
+  <ul class="nr"><li><a href="./index.html">Accueil</a></li>
+    <li><a href="./menu.html">Menu</a></li>
+    <li><a href="./galerie.html">Galerie</a></li>
+    <li><a href="./reservation.html">Réserver</a></li>
+    <li><a href="./contact.html" class="active">Contact</a></li>
+    <li><a href="./reservation.html" class="nbtn">Réserver</a></li>
+  </ul>
+</nav>
+<div id="ch"><span class="stag">Contact &amp; Accès</span>
+  <h1><span class="rw"><span class="ri">Venez nous</span></span><br><span class="rw"><span class="ri"><em>rendre visite</em></span></span></h1>
+</div>
+<div id="cm">
+  <div class="cc"><h3>Horaires</h3><div class="hr"><span class="hd2">mercredi06:30–17:30</span></div></div>
+  <div class="cc"><h3>Coordonnées</h3>
+    <div class="ci"><div class="cii">📍</div><div><span class="cil">Adresse</span><span class="civ">7 Pl. de l'Île de Beauté, 06300 Nice, France</span></div></div>
+    <div class="ci"><div class="cii">📞</div><div><span class="cil">Téléphone</span><span class="civ"><a href="tel:+33 4 93 56 00 52">+33 4 93 56 00 52</a></span></div></div><div class="ci"><div class="cii">&#x1F5FA;</div><div><span class="cil">Google Maps</span><span class="civ"><a href="https://www.google.com/maps/place/Salon+de+Th%C3%A9+-+Ile+de+Beaut%C3%A9/data=!4m7!3m6!1s0x12cddab8e6337149:0x8176478292729387!8m2!3d43.6987788!4d7.2847799!16s%2Fg%2F11b6dp3g2f!19sChIJSXEz5rjazRIRh5NykoJHdoE?authuser=0&hl=fr&rclk=1" target="_blank">Voir l'itin&eacute;raire &rarr;</a></span></div></div><div class="ci"><div class="cii">⭐</div><div><span class="cil">Note Google</span><span class="civ">4.9/5 &mdash; 151 avis</span></div></div>
+    <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap">
+      <a href="tel:+33 4 93 56 00 52" class="btn-a"><span>📞 Appeler</span></a>
+      <a href="./reservation.html" class="btn-a"><span>📅 Réserver</span></a>
+    </div>
+  </div>
+</div>
+<div style="height:400px;overflow:hidden;border-top:1px solid var(--br);position:relative"><iframe title="Carte Salon de Thé - Ile de Beauté" src="https://maps.google.com/maps?q=7+Pl.+de+l'Île+de+Beauté%2C+06300+Nice%2C+France&output=embed&z=15" width="100%" height="100%" style="border:0;filter:grayscale(80%) brightness(.68) contrast(1.1)" allowfullscreen loading="lazy"></iframe></div>
+<footer>
+  <span class="fl">Salon de Thé - Ile de Beauté</span>
+  <span class="fc">7 Pl. de l'Île de Beauté, 06300 Nice, France</span>
+  <span style="font-size:.62rem;color:var(--mu)"><a href="tel:+33 4 93 56 00 52" style="color:var(--mu);text-decoration:none;transition:color .3s" onmouseenter="this.style.color='var(--acc)'" onmouseleave="this.style.color='var(--mu)'">+33 4 93 56 00 52</a>&ensp;·&ensp;<a href="https://www.google.com/maps/place/Salon+de+Th%C3%A9+-+Ile+de+Beaut%C3%A9/data=!4m7!3m6!1s0x12cddab8e6337149:0x8176478292729387!8m2!3d43.6987788!4d7.2847799!16s%2Fg%2F11b6dp3g2f!19sChIJSXEz5rjazRIRh5NykoJHdoE?authuser=0&hl=fr&rclk=1" target="_blank" style="color:var(--acc);text-decoration:none;font-size:.6rem;letter-spacing:.1em">Maps →</a></span>
+  <span class="fc">© Salon de Thé - Ile de Beauté · 06300 Nice</span>
+</footer>
+<script>gsap.registerPlugin(ScrollTrigger);
+const lenis=new Lenis({duration:1.45,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});
+lenis.on('scroll',ScrollTrigger.update);
+gsap.ticker.add(t=>lenis.raf(t*1000));
+gsap.ticker.lagSmoothing(0);
+const c1=document.getElementById('c1'),c2=document.getElementById('c2');
+let mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+document.querySelectorAll('a,button,input,select,textarea').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});
+(function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;c1.style.left=mx+'px';c1.style.top=my+'px';c2.style.left=rx+'px';c2.style.top=ry+'px';requestAnimationFrame(loop);})();
+ScrollTrigger.create({trigger:'body',start:'80px top',
+  onEnter:()=>document.getElementById('nav').classList.add('stuck'),
+  onLeaveBack:()=>document.getElementById('nav').classList.remove('stuck')});
+document.querySelectorAll('.ri').forEach(el=>gsap.to(el,{y:0,duration:.95,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 93%'}}));
+document.querySelectorAll('.btn-a').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect();gsap.to(btn,{x:(e.clientX-r.left-r.width/2)*.18,y:(e.clientY-r.top-r.height/2)*.18,duration:.3,ease:'power2.out'})});
+  btn.addEventListener('mouseleave',()=>gsap.to(btn,{x:0,y:0,duration:.7,ease:'elastic.out(1,.4)'}));
+});
+
+gsap.to('.hr',{opacity:1,x:0,stagger:.08,duration:.62,ease:'power2.out',scrollTrigger:{trigger:'#cm',start:'top 78%'}});
+gsap.to('.ci',{opacity:1,x:0,stagger:.1,duration:.62,ease:'power2.out',scrollTrigger:{trigger:'#cm',start:'top 78%'}});
+</script>
+</body></html>

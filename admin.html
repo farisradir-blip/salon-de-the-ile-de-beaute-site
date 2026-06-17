@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin — Salon de Thé - Ile de Beauté</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0607;--s1:#140C0E;--s2:#1C1014;--acc:#A83850;--txt:#F2EAE8;--mu:#8A6872;--br:rgba(168,56,80,.13);--fd:'Playfair Display'}
+
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;cursor:auto}
+*{box-sizing:border-box;margin:0;padding:0}
+::-webkit-scrollbar{width:1px}::-webkit-scrollbar-thumb{background:var(--acc)}
+#adm-head{background:var(--s1);border-bottom:1px solid var(--br);padding:22px 5vw;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.adm-logo{font-family:var(--fd),serif;font-size:1.1rem;color:var(--acc);letter-spacing:.18em}
+.adm-sub{font-size:.56rem;letter-spacing:.3em;text-transform:uppercase;color:var(--mu)}
+.adm-badge{padding:5px 14px;border:1px solid var(--br);font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mu)}
+#adm-body{padding:40px 5vw;max-width:1200px;margin:0 auto}
+.sec-title{font-family:var(--fd),serif;font-size:1.4rem;font-weight:300;color:var(--acc);margin-bottom:20px;letter-spacing:.06em}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:40px}
+.card{background:var(--s1);border:1px solid var(--br);padding:22px 20px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--acc);opacity:.4}
+.card-val{font-family:var(--fd),serif;font-size:2.4rem;font-weight:300;color:var(--acc);display:block;line-height:1;margin-bottom:6px}
+.card-lbl{font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mu)}
+.plinks{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px}
+.pl{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border:1px solid var(--br);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:all .3s}
+.pl:hover{border-color:var(--acc);color:var(--acc)}
+.pl-icon{font-size:.8rem;color:var(--acc)}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--br);margin-bottom:40px}
+table{width:100%;border-collapse:collapse;font-size:.78rem}
+thead th{background:var(--s1);padding:12px 14px;text-align:left;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mu);font-weight:400;border-bottom:1px solid var(--br);white-space:nowrap}
+tbody tr{border-bottom:1px solid var(--br);transition:background .3s}
+tbody tr:hover{background:var(--s1)}
+tbody td{padding:11px 14px;color:var(--txt);vertical-align:top}
+.empty{padding:40px;text-align:center;color:var(--mu);font-style:italic;font-size:.82rem}
+.btn-adm{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border:1px solid var(--br);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mu);background:transparent;cursor:pointer;transition:all .3s;font-family:'DM Sans',sans-serif}
+.btn-adm:hover{border-color:var(--acc);color:var(--acc)}
+.btn-adm.danger:hover{border-color:#c0392b;color:#c0392b}
+.adm-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+
+</style>
+</head>
+<body>
+<div id="adm-head">
+  <div>
+    <div class="adm-logo">Salon de Thé - Ile de Beauté</div>
+    <div class="adm-sub">Administration · 06300 Nice</div>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+    <span class="adm-badge">Bistrot Gastronomique</span>
+    <a href="./index.html" target="_blank" style="color:var(--acc);font-size:.6rem;letter-spacing:.14em;text-decoration:none;text-transform:uppercase">Voir le site ↗</a>
+  </div>
+</div>
+<div id="adm-body">
+  <!-- STATS CARDS -->
+  <div class="sec-title">Vue d'ensemble</div>
+  <div class="cards">
+    <div class="card"><span class="card-val" id="cv-res">—</span><span class="card-lbl">Réservations</span></div>
+    <div class="card"><span class="card-val">4.9</span><span class="card-lbl">Note Google</span></div>
+    <div class="card"><span class="card-val">151</span><span class="card-lbl">Avis clients</span></div>
+    <div class="card"><span class="card-val">5</span><span class="card-lbl">Pages du site</span></div>
+    <div class="card"><span class="card-val" id="cv-guests">—</span><span class="card-lbl">Couverts totaux</span></div>
+  </div>
+  <!-- PAGE LINKS -->
+  <div class="sec-title">Pages du site</div>
+  <div class="plinks"><a href="./index.html" target="_blank" class="pl"><span class="pl-icon">↗</span>index.html</a><a href="./menu.html" target="_blank" class="pl"><span class="pl-icon">↗</span>menu.html</a><a href="./galerie.html" target="_blank" class="pl"><span class="pl-icon">↗</span>galerie.html</a><a href="./reservation.html" target="_blank" class="pl"><span class="pl-icon">↗</span>reservation.html</a><a href="./contact.html" target="_blank" class="pl"><span class="pl-icon">↗</span>contact.html</a>
+    <a href="https://farisradir-blip.github.io/salon-de-the-ile-de-beaute-site" target="_blank" class="pl"><span class="pl-icon">🌐</span>Site en ligne</a>
+  </div>
+  <!-- RESERVATIONS TABLE -->
+  <div class="sec-title">Réservations</div>
+  <div class="adm-row">
+    <button class="btn-adm" onclick="exportCSV()">⬇ Exporter CSV</button>
+    <button class="btn-adm danger" onclick="clearAll()">🗑 Effacer tout</button>
+    <span id="res-count" style="font-size:.62rem;color:var(--mu);letter-spacing:.1em"></span>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr>
+        <th>Prénom</th><th>Nom</th><th>Email</th><th>Téléphone</th>
+        <th>Date</th><th>Heure</th><th>Pers.</th><th>Message</th><th>Soumis le</th>
+      </tr></thead>
+      <tbody id="res-tbody"><tr><td colspan="9" class="empty">Chargement…</td></tr></tbody>
+    </table>
+  </div>
+  <!-- INFO -->
+  <div class="sec-title">Informations établissement</div>
+  <div style="background:var(--s1);border:1px solid var(--br);padding:22px;font-size:.82rem;line-height:2;color:var(--mu)">
+    <div><strong style="color:var(--txt)">Nom :</strong> Salon de Thé - Ile de Beauté</div>
+    <div><strong style="color:var(--txt)">Adresse :</strong> 7 Pl. de l'Île de Beauté, 06300 Nice, France</div>
+    <div><strong style="color:var(--txt)">Téléphone :</strong> +33 4 93 56 00 52</div>
+    <div><strong style="color:var(--txt)">Google Maps :</strong> <a href="https://www.google.com/maps/place/Salon+de+Th%C3%A9+-+Ile+de+Beaut%C3%A9/data=!4m7!3m6!1s0x12cddab8e6337149:0x8176478292729387!8m2!3d43.6987788!4d7.2847799!16s%2Fg%2F11b6dp3g2f!19sChIJSXEz5rjazRIRh5NykoJHdoE?authuser=0&hl=fr&rclk=1" target="_blank" style="color:var(--acc)">https://www.google.com/maps/place/Salon+de+Th%C3%A9+-+Ile+de+Beaut%C3%A9/data=!4m7!3m6!1s0x12cddab8e6337149:0x8176478292729387!8m2!3d43.6987788!4d7.2847799!16s%2Fg%2F11b6dp3g2f!19sChIJSXEz5rjazRIRh5NykoJHdoE?authuser=0&hl=fr&rclk=1</a></div>
+    <div><strong style="color:var(--txt)">Catégorie :</strong> Bistrot Gastronomique</div>
+    <div><strong style="color:var(--txt)">Site live :</strong> <a href="https://farisradir-blip.github.io/salon-de-the-ile-de-beaute-site" target="_blank" style="color:var(--acc)">https://farisradir-blip.github.io/salon-de-the-ile-de-beaute-site</a></div>
+  </div>
+</div>
+<script>
+const KEY='res_salon_de_th____ile_de_beaut_';
+function loadRes(){
+  const data=JSON.parse(localStorage.getItem(KEY)||'[]');
+  const tbody=document.getElementById('res-tbody');
+  document.getElementById('cv-res').textContent=data.length;
+  document.getElementById('res-count').textContent=data.length+' réservation'+(data.length!==1?'s':'');
+  const guests=data.reduce((s,r)=>s+(+r.guests||0),0);
+  document.getElementById('cv-guests').textContent=guests||'—';
+  if(!data.length){tbody.innerHTML='<tr><td colspan="9" class="empty">Aucune réservation enregistrée pour le moment.</td></tr>';return;}
+  tbody.innerHTML=data.slice().reverse().map(r=>{
+    const ds=r.date?new Date(r.date+'T12:00:00').toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric'}):'—';
+    const ts=r.ts?new Date(r.ts).toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
+    return '<tr><td>'+esc(r.fn||'')+'</td><td>'+esc(r.ln||'')+'</td><td>'+esc(r.email||'')+'</td><td>'+esc(r.tel||'—')+'</td><td>'+ds+'</td><td>'+(r.time||'—')+'</td><td>'+(r.guests||'—')+'</td><td>'+esc(r.msg||'—')+'</td><td>'+ts+'</td></tr>';
+  }).join('');
+}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function exportCSV(){
+  const data=JSON.parse(localStorage.getItem(KEY)||'[]');
+  if(!data.length){alert('Aucune réservation à exporter.');return;}
+  const head='Prénom,Nom,Email,Téléphone,Date,Heure,Personnes,Message,Soumis';
+  const rows=data.map(r=>[r.fn,r.ln,r.email,r.tel,r.date,r.time,r.guests,r.msg,r.ts].map(v=>'"'+(v||'').replace(/"/g,'""')+'"').join(','));
+  const csv=head+'\n'+rows.join('\n');
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download='reservations_salon_de_th____ile_de_beaut__'+new Date().toISOString().split('T')[0]+'.csv';a.click();
+}
+function clearAll(){
+  if(confirm('Effacer toutes les réservations ? Cette action est irréversible.')){
+    localStorage.removeItem(KEY);loadRes();
+  }
+}
+loadRes();
+</script>
+</body></html>

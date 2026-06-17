@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Salon de Thé - Ile de Beauté — Réservation en ligne</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<style>
+:root{--fd:'Playfair Display'}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:hidden;scroll-behavior:auto}
+:root{--bg:#0A0607;--s1:#140C0E;--s2:#1C1014;--acc:#A83850;--acc2:#6B1E30;--acc3:#CC5870;--txt:#F2EAE8;--mu:#8A6872;--br:rgba(168,56,80,.13);--pc:168,56,80;--fd:'Playfair Display'}
+body{background:var(--bg);color:var(--txt);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
+::selection{background:var(--acc);color:var(--bg)}
+::-webkit-scrollbar{width:1px}::-webkit-scrollbar-thumb{background:var(--acc)}
+#c1,#c2{position:fixed;border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:difference;top:0;left:0;will-change:transform}
+#c1{width:6px;height:6px;background:#fff;transform:translate(-50%,-50%)}
+#c2{width:34px;height:34px;border:1px solid rgba(255,255,255,.3);transform:translate(-50%,-50%);transition:width .4s cubic-bezier(.16,1,.3,1),height .4s cubic-bezier(.16,1,.3,1)}
+body.hov #c2{width:56px;height:56px}
+#noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.034;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");background-size:200px;animation:ns 8s steps(1) infinite}
+@keyframes ns{0%{background-position:0 0}12%{background-position:-40px 18px}25%{background-position:18px -30px}37%{background-position:-10px 40px}50%{background-position:30px 6px}62%{background-position:-20px -12px}75%{background-position:8px 22px}87%{background-position:-5px -18px}}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:28px 5vw;display:flex;align-items:center;justify-content:space-between;transition:padding .5s,background .5s,backdrop-filter .5s}
+nav.stuck{padding:13px 5vw;background:rgba(10,6,7,.88);backdrop-filter:blur(28px);border-bottom:1px solid var(--br)}
+.nl{font-family:var(--fd),serif;font-size:1.05rem;letter-spacing:.16em;color:var(--acc);text-decoration:none;transition:opacity .3s}
+.nl:hover{opacity:.65}
+.nr{display:flex;gap:28px;list-style:none;align-items:center}
+.nr a{font-size:.57rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .3s;position:relative}
+.nr a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--acc);transition:width .3s}
+.nr a:hover,.nr a.active{color:var(--acc)}
+.nr a:hover::after,.nr a.active::after{width:100%}
+.nbtn{padding:9px 20px;border:1px solid var(--acc);color:var(--acc);font-size:.57rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;transition:background .3s,color .3s;display:inline-block}
+.nbtn:hover{background:var(--acc);color:var(--bg)}
+.nbtn::after{display:none!important}
+@media(max-width:768px){.nr li:not(:last-child){display:none}}
+section{padding:96px 5vw;position:relative}
+.stag{font-size:.55rem;letter-spacing:.42em;text-transform:uppercase;color:var(--acc);display:block;margin-bottom:18px}
+.stitle{font-family:var(--fd),serif;font-size:clamp(1.8rem,3.8vw,3.4rem);font-weight:300;line-height:1.1}
+.stitle em{font-style:italic;color:var(--acc)}
+.rw{overflow:hidden;display:block}.ri{display:inline-block;transform:translateY(110%)}
+.acc-line{width:1px;height:68px;background:var(--acc);margin:36px auto;opacity:.55}
+footer{padding:46px 5vw;border-top:1px solid var(--br);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.fl{font-family:var(--fd),serif;font-size:.95rem;color:var(--acc);letter-spacing:.14em}
+.fc{font-size:.57rem;color:var(--mu);letter-spacing:.08em}
+.btn-a{display:inline-flex;align-items:center;gap:10px;padding:14px 30px;border:1px solid var(--acc);color:var(--acc);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;position:relative;overflow:hidden;transition:color .4s}
+.btn-a::after{content:'';position:absolute;inset:0;background:var(--acc);transform:translateX(-101%);transition:transform .44s cubic-bezier(.77,0,.18,1)}
+.btn-a:hover{color:var(--bg)}.btn-a:hover::after{transform:translateX(0)}
+.btn-a span{position:relative;z-index:1}
+.btn-b{display:inline-flex;align-items:center;gap:10px;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mu);text-decoration:none;transition:color .3s,gap .4s}
+.btn-b:hover{color:var(--acc);gap:18px}
+.bbl{width:28px;height:1px;background:currentColor;display:block;transition:width .4s}
+.btn-b:hover .bbl{width:44px}
+
+
+#rh{padding:140px 5vw 58px;background:var(--s1);border-bottom:1px solid var(--br)}
+#rh h1{font-family:var(--fd),serif;font-size:clamp(2.8rem,7vw,6.5rem);font-weight:300;margin-top:14px;line-height:.9}
+#rh h1 em{font-style:italic;color:var(--acc)}
+#rm{display:grid;grid-template-columns:1fr 1.2fr}
+@media(max-width:900px){#rm{grid-template-columns:1fr}}
+#ri{padding:58px 5vw;background:var(--bg);border-right:1px solid var(--br)}
+#ri h3{font-family:var(--fd),serif;font-size:1.5rem;font-weight:300;margin-bottom:28px}
+.ir{display:flex;align-items:flex-start;gap:13px;padding:14px 0;border-bottom:1px solid var(--br);opacity:0;transform:translateX(-12px)}
+.ii{width:30px;height:30px;border:1px solid rgba(168,56,80,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;color:var(--acc);flex-shrink:0;margin-top:1px}
+.il{font-size:.51rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mu);display:block;margin-bottom:3px}
+.iv{font-size:.84rem}.iv a{color:inherit;text-decoration:none;transition:color .3s}.iv a:hover{color:var(--acc)}
+.inote{margin-top:26px;padding:18px;border:1px solid var(--br);background:rgba(168,56,80,.04);font-size:.77rem;color:var(--mu);line-height:1.78}
+#rf{padding:58px 5vw;background:var(--s1)}
+#rf h3{font-family:var(--fd),serif;font-size:1.5rem;font-weight:300;margin-bottom:30px}
+.fg{margin-bottom:22px}
+.fl2{font-size:.53rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mu);display:block;margin-bottom:8px;transition:color .3s}
+.fg:focus-within .fl2{color:var(--acc)}
+.fi{width:100%;background:var(--bg);border:1px solid var(--br);color:var(--txt);padding:13px 15px;font-size:.84rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .3s;appearance:none}
+.fi:focus{border-color:var(--acc)}
+.fi::placeholder{color:var(--mu)}
+textarea.fi{resize:vertical;min-height:80px}
+.fr2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:580px){.fr2{grid-template-columns:1fr}}
+.slots{display:flex;flex-wrap:wrap;gap:7px;margin-top:5px}
+.slot{padding:8px 14px;border:1px solid var(--br);font-size:.67rem;letter-spacing:.1em;color:var(--mu);background:transparent;cursor:none;transition:all .3s;font-family:'DM Sans',sans-serif}
+.slot:hover{border-color:rgba(168,56,80,.4);color:var(--txt)}.slot.sel{background:var(--acc);border-color:var(--acc);color:var(--bg);font-weight:500}
+.gctl{display:flex;align-items:stretch;width:fit-content}
+.gb{width:40px;border:1px solid var(--br);background:transparent;color:var(--txt);font-size:1.1rem;cursor:none;transition:all .3s;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif}
+.gb:hover{border-color:var(--acc);color:var(--acc)}
+#gc{width:60px;text-align:center;background:var(--bg);border-top:1px solid var(--br);border-bottom:1px solid var(--br);border-left:none;border-right:none;height:40px;color:var(--txt);font-size:.92rem;font-family:'DM Sans',sans-serif;outline:none}
+.fsub{width:100%;padding:15px;background:transparent;border:1px solid var(--acc);color:var(--acc);font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;cursor:none;position:relative;overflow:hidden;transition:color .4s;margin-top:8px;font-family:'DM Sans',sans-serif}
+.fsub::after{content:'';position:absolute;inset:0;background:var(--acc);transform:translateX(-101%);transition:transform .44s cubic-bezier(.77,0,.18,1)}
+.fsub:hover{color:var(--bg)}.fsub:hover::after{transform:translateX(0)}
+.fsub span{position:relative;z-index:1}
+#rsucc{display:none;flex-direction:column;align-items:center;justify-content:center;padding:72px 32px;text-align:center}
+.sm{font-family:var(--fd),serif;font-size:3.8rem;color:var(--acc);margin-bottom:22px;line-height:1}
+#rsucc h3{font-family:var(--fd),serif;font-size:2rem;font-weight:300;color:var(--acc);margin-bottom:14px}
+#rsucc p{color:var(--mu);line-height:1.92;max-width:420px;font-size:.86rem}
+
+</style>
+</head>
+<body>
+<div id="c1"></div><div id="c2"></div>
+<div id="noise"></div>
+<nav id="nav">
+  <a href="./index.html" class="nl">S.</a>
+  <ul class="nr"><li><a href="./index.html">Accueil</a></li>
+    <li><a href="./menu.html">Menu</a></li>
+    <li><a href="./galerie.html">Galerie</a></li>
+    <li><a href="./reservation.html" class="active">Réserver</a></li>
+    <li><a href="./contact.html">Contact</a></li>
+    <li><a href="./reservation.html" class="nbtn">Réserver</a></li>
+  </ul>
+</nav>
+<div id="rh"><span class="stag">Réservation en ligne</span>
+  <h1><span class="rw"><span class="ri">Réservez votre</span></span><br><span class="rw"><span class="ri"><em>table</em></span></span></h1>
+</div>
+<div id="rm">
+  <div id="ri">
+    <h3>Nous trouver</h3>
+    <div class="ir"><div class="ii">📍</div><div><span class="il">Adresse</span><span class="iv">7 Pl. de l'Île de Beauté, 06300 Nice, France</span></div></div>
+    <div class="ir"><div class="ii">📞</div><div><span class="il">Téléphone</span><span class="iv"><a href="tel:+33 4 93 56 00 52">+33 4 93 56 00 52</a></span></div></div><div class="ir"><div class="ii">🗺</div><div><span class="il">Itinéraire</span><span class="iv"><a href="https://www.google.com/maps/place/Salon+de+Th%C3%A9+-+Ile+de+Beaut%C3%A9/data=!4m7!3m6!1s0x12cddab8e6337149:0x8176478292729387!8m2!3d43.6987788!4d7.2847799!16s%2Fg%2F11b6dp3g2f!19sChIJSXEz5rjazRIRh5NykoJHdoE?authuser=0&hl=fr&rclk=1" target="_blank">Voir sur Maps →</a></span></div></div>
+    <div class="ir"><div class="ii">⏰</div><div><span class="il">Horaires</span><span class="iv">Mar–Sam 07h–20h · Dim 08h–18h</span></div></div>
+    <div class="inote">Votre demande sera confirmée dans les 24h. Pour une réservation urgente, appelez-nous directement.</div>
+  </div>
+  <div id="rf">
+    <h3>Votre demande</h3>
+    <form id="rform" novalidate>
+      <div class="fr2">
+        <div class="fg"><label class="fl2">Prénom *</label><input class="fi" type="text" name="fn" placeholder="Jean" required autocomplete="given-name"></div>
+        <div class="fg"><label class="fl2">Nom *</label><input class="fi" type="text" name="ln" placeholder="Dupont" required autocomplete="family-name"></div>
+      </div>
+      <div class="fr2">
+        <div class="fg"><label class="fl2">Email *</label><input class="fi" type="email" name="email" placeholder="jean@email.com" required autocomplete="email"></div>
+        <div class="fg"><label class="fl2">Téléphone</label><input class="fi" type="tel" name="tel" placeholder="+33 6 12 34 56 78" autocomplete="tel"></div>
+      </div>
+      <div class="fr2">
+        <div class="fg"><label class="fl2">Date *</label><input class="fi" id="fdate" type="date" name="date" required></div>
+        <div class="fg"><label class="fl2">Personnes</label>
+          <div class="gctl"><button type="button" class="gb" id="gm">−</button><input id="gc" type="number" name="guests" value="2" min="1" max="20" readonly><button type="button" class="gb" id="gp">+</button></div>
+        </div>
+      </div>
+      <div class="fg"><label class="fl2">Créneau *</label>
+        <div class="slots">
+          <button type="button" class="slot" data-t="12:00">12h00</button>
+          <button type="button" class="slot" data-t="12:30">12h30</button>
+          <button type="button" class="slot" data-t="13:00">13h00</button>
+          <button type="button" class="slot" data-t="13:30">13h30</button>
+          <button type="button" class="slot" data-t="19:00">19h00</button>
+          <button type="button" class="slot" data-t="19:30">19h30</button>
+          <button type="button" class="slot" data-t="20:00">20h00</button>
+          <button type="button" class="slot" data-t="20:30">20h30</button>
+        </div>
+        <input type="hidden" name="time" id="ft">
+      </div>
+      <div class="fg"><label class="fl2">Message</label><textarea class="fi" name="msg" placeholder="Allergies, occasion spéciale…"></textarea></div>
+      <button type="submit" class="fsub"><span>Envoyer la demande ›</span></button>
+    </form>
+    <div id="rsucc"><div class="sm">✦</div><h3>Merci !</h3><p id="smsg"></p>
+      <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+        <a href="./menu.html" class="btn-a"><span>Voir la carte</span></a>
+        <a href="./index.html" class="btn-b"><span class="bbl"></span><span>Accueil</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>
+  <span class="fl">Salon de Thé - Ile de Beauté</span>
+  <span class="fc">7 Pl. de l'Île de Beauté, 06300 Nice, France</span>
+  <span style="font-size:.62rem;color:var(--mu)"><a href="tel:+33 4 93 56 00 52" style="color:var(--mu);text-decoration:none;transition:color .3s" onmouseenter="this.style.color='var(--acc)'" onmouseleave="this.style.color='var(--mu)'">+33 4 93 56 00 52</a>&ensp;·&ensp;<a href="https://www.google.com/maps/place/Salon+de+Th%C3%A9+-+Ile+de+Beaut%C3%A9/data=!4m7!3m6!1s0x12cddab8e6337149:0x8176478292729387!8m2!3d43.6987788!4d7.2847799!16s%2Fg%2F11b6dp3g2f!19sChIJSXEz5rjazRIRh5NykoJHdoE?authuser=0&hl=fr&rclk=1" target="_blank" style="color:var(--acc);text-decoration:none;font-size:.6rem;letter-spacing:.1em">Maps →</a></span>
+  <span class="fc">© Salon de Thé - Ile de Beauté · 06300 Nice</span>
+</footer>
+<script>gsap.registerPlugin(ScrollTrigger);
+const lenis=new Lenis({duration:1.45,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});
+lenis.on('scroll',ScrollTrigger.update);
+gsap.ticker.add(t=>lenis.raf(t*1000));
+gsap.ticker.lagSmoothing(0);
+const c1=document.getElementById('c1'),c2=document.getElementById('c2');
+let mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+document.querySelectorAll('a,button,input,select,textarea').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});
+(function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;c1.style.left=mx+'px';c1.style.top=my+'px';c2.style.left=rx+'px';c2.style.top=ry+'px';requestAnimationFrame(loop);})();
+ScrollTrigger.create({trigger:'body',start:'80px top',
+  onEnter:()=>document.getElementById('nav').classList.add('stuck'),
+  onLeaveBack:()=>document.getElementById('nav').classList.remove('stuck')});
+document.querySelectorAll('.ri').forEach(el=>gsap.to(el,{y:0,duration:.95,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 93%'}}));
+document.querySelectorAll('.btn-a').forEach(btn=>{
+  btn.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect();gsap.to(btn,{x:(e.clientX-r.left-r.width/2)*.18,y:(e.clientY-r.top-r.height/2)*.18,duration:.3,ease:'power2.out'})});
+  btn.addEventListener('mouseleave',()=>gsap.to(btn,{x:0,y:0,duration:.7,ease:'elastic.out(1,.4)'}));
+});
+
+document.getElementById('fdate').min=new Date().toISOString().split('T')[0];
+const gc=document.getElementById('gc');
+document.getElementById('gm').addEventListener('click',()=>{if(+gc.value>1){gc.value=+gc.value-1;gsap.fromTo(gc,{y:-4,opacity:.6},{y:0,opacity:1,duration:.2})}});
+document.getElementById('gp').addEventListener('click',()=>{if(+gc.value<20){gc.value=+gc.value+1;gsap.fromTo(gc,{y:4,opacity:.6},{y:0,opacity:1,duration:.2})}});
+document.querySelectorAll('.slot').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.slot').forEach(s=>s.classList.remove('sel'));
+    btn.classList.add('sel');document.getElementById('ft').value=btn.dataset.t;
+    gsap.fromTo(btn,{scale:.9},{scale:1,duration:.25,ease:'back.out(2)'});
+  });
+});
+document.getElementById('rform').addEventListener('submit',e=>{
+  e.preventDefault();
+  const d=new FormData(e.target);
+  const obj={fn:d.get('fn'),ln:d.get('ln'),email:d.get('email'),tel:d.get('tel'),
+             date:d.get('date'),guests:d.get('guests'),time:d.get('time'),msg:d.get('msg'),
+             business:'Salon de Thé - Ile de Beauté',city:'06300 Nice',ts:new Date().toISOString()};
+  if(!obj.fn||!obj.ln||!obj.email||!obj.date||!obj.time){
+    gsap.fromTo('#rform',{x:-8},{x:0,duration:.45,ease:'elastic.out(1,.3)'});return;
+  }
+  const all=JSON.parse(localStorage.getItem('res_salon_de_th____ile_de_beaut_')||'[]');
+  all.push(obj);localStorage.setItem('res_salon_de_th____ile_de_beaut_',JSON.stringify(all));
+  gsap.to('#rform',{opacity:0,y:-22,duration:.38,ease:'power2.in',onComplete:()=>{
+    document.getElementById('rform').style.display='none';
+    const s=document.getElementById('rsucc');s.style.display='flex';
+    const ds=obj.date?new Date(obj.date+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'}):'';
+    document.getElementById('smsg').textContent='Merci '+obj.fn+', demande pour '+ds+(obj.time?' à '+obj.time:'')+' ('+obj.guests+' pers.) enregistrée. Confirmation sous 24h.';
+    gsap.fromTo(s,{opacity:0,y:18},{opacity:1,y:0,duration:.65,ease:'power2.out'});
+  }});
+});
+gsap.to('.ir',{opacity:1,x:0,stagger:.09,duration:.62,ease:'power2.out',delay:.2});
+gsap.fromTo('#rf',{opacity:0,x:18},{opacity:1,x:0,duration:.72,ease:'power2.out',delay:.12});
+</script>
+</body></html>
